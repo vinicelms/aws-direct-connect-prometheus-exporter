@@ -21,7 +21,6 @@ class DirectConnect:
         self.location = None
         self.bandwidth = None
         self.tags = {}
-        self.virtual_interfaces = []
 
 class VirtualInterface:
 
