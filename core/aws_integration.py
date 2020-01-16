@@ -19,6 +19,7 @@ class AWSInfo:
             dc = DirectConnect()
             dc.owner_account = conn['ownerAccount']
             dc.connection_id = conn['connectionId']
+            dc.name = conn['connectionName']
             dc.region = conn['region']
             dc.location = conn['location']
             dc.bandwidth = conn['bandwidth']
