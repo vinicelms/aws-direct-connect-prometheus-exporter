@@ -21,13 +21,24 @@ class DirectConnect:
         self.location = None
         self.bandwidth = None
         self.tags = {}
+        self.virtual_interfaces = []
 
 class VirtualInterface:
 
     def __init__(self):
-        pass
+        self.id = None
+        self.name = None
+        self.region = None
+        self.type = None
+        self.state = None
+        self.bgp = []
 
 class BGP:
 
     def __init__(self):
-        pass
+        self.id = None
+        self.address_family = None
+        self.amazon_address = None
+        self.customer_address = None
+        self.state = None
+        self.status = None
