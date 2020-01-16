@@ -5,7 +5,7 @@ class Config:
     def __init__(self):
         self.__aws_access_key = self.__get_aws_access_key()
         self.__aws_secret_key = self.__get_aws_secret_key()
-        self.__aws_regions = self.__get_aws_regions()
+        self.__aws_region = self.__get_aws_region()
 
     @property
     def aws_access_key(self):
@@ -17,7 +17,7 @@ class Config:
 
     @property
     def aws_region(self):
-        return self.__aws_regions
+        return self.__aws_region
 
     def __get_aws_access_key(self):
         if 'AWS_ACCESS_KEY' not in os.environ:
@@ -31,8 +31,8 @@ class Config:
         else:
             return os.environ['AWS_SECRET_KEY']
 
-    def __get_aws_regions(self):
-        if 'AWS_REGIONS' not in os.environ:
-            raise EnvironmentError("Environment variable AWS_REGIONS has not been set")
+    def __get_aws_region(self):
+        if 'AWS_REGION' not in os.environ:
+            raise EnvironmentError("Environment variable AWS_REGION has not been set")
         else:
-            return os.environ['AWS_REGIONS']
+            return os.environ['AWS_REGION']
