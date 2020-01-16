@@ -21,7 +21,15 @@ class DirectConnect:
         self.location = None
         self.bandwidth = None
         self.tags = {}
-        self.virtual_interfaces = []
+        self.__virtual_interfaces = []
+
+    @property
+    def virtual_interfaces(self):
+        return self.__virtual_interfaces
+
+    @virtual_interfaces.setter
+    def virtual_interfaces(self, value):
+        self.__virtual_interfaces.append(value)
 
 class VirtualInterface:
 
@@ -31,7 +39,15 @@ class VirtualInterface:
         self.region = None
         self.type = None
         self.state = None
-        self.bgp = []
+        self.__bgp = []
+
+    @property
+    def bgp(self):
+        return self.__bgp
+
+    @bgp.setter
+    def bgp(self, value):
+        self.__bgp.append(value)
 
 class BGP:
 
