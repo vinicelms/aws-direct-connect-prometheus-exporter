@@ -5,7 +5,7 @@ class Config:
     def __init__(self):
         self.__aws_access_key = self.__get_aws_access_key()
         self.__aws_secret_key = self.__get_aws_secret_key()
-        self.__aws_regions = None
+        self.__aws_regions = self.__get_aws_regions()
 
     @property
     def aws_access_key(self):
