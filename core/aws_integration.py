@@ -12,6 +12,25 @@ class AWSInfo:
             service_name='directconnect'
         )
 
+    def list_direct_connect(self):
+        conns = self.__client.describe_connections()
+        for conn in conns['connections']:
+            dc = DirectConnect()
+            dc.owner_account = conn['ownerAccount']
+            dc.connection_id = conn['connectionId']
+            dc.region = conn['region']
+            dc.location = conn['location']
+            dc.bandwidth = conn['bandwidth']
+            dc.tags = self.__get_tag_as_dict(conn['tags'])
+            dc.virtual_interfaces = None
+
+    def __get_tag_as_dict(self, tag_list):
+        tag_dict = {}
+        for tag in tag_list:
+            tag_dict[tag['key']] = tag['value']
+
+        return tag_dict
+
 class DirectConnect:
 
     def __init__(self):
