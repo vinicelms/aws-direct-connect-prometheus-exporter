@@ -9,7 +9,8 @@ class AWSInfo:
         self.__client = boto3.client(
             aws_access_key_id=CONFIG.aws_access_key,
             aws_secret_access_key=CONFIG.aws_secret_key,
-            service_name='directconnect'
+            service_name='directconnect',
+            region_name=CONFIG.aws_region
         )
 
     def list_direct_connect(self):
