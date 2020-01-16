@@ -62,6 +62,7 @@ class DirectConnect:
     def __init__(self):
         self.owner_account = None
         self.connection_id = None
+        self.name = None
         self.region = None
         self.location = None
         self.bandwidth = None
