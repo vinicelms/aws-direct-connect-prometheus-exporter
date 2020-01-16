@@ -23,7 +23,7 @@ class AWSInfo:
             dc.location = conn['location']
             dc.bandwidth = conn['bandwidth']
             dc.tags = self.__get_tag_as_dict(conn['tags'])
-            dc.virtual_interfaces = self.__list_virtual_interfaces()
+            dc.virtual_interfaces = self.__list_virtual_interfaces(conn['connectionId'])
             yield dc
 
     def __get_tag_as_dict(self, tag_list):
