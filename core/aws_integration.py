@@ -37,6 +37,7 @@ class AWSInfo:
         vir_ints = self.__client.describe_virtual_interfaces(
             connectionId=direct_connect_id
         )
+        vi_list = []
 
         for vir_int in vir_ints['virtualInterfaces']:
             vi = VirtualInterface()
@@ -56,7 +57,9 @@ class AWSInfo:
                 bgp.status = bgp_info['bgpStatus']
                 vi.bgp = bgp
 
-            yield vi
+            vi_list.append(vi)
+
+        return vi_list
 
 class DirectConnect:
 
