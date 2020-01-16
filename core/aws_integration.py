@@ -22,7 +22,8 @@ class AWSInfo:
             dc.location = conn['location']
             dc.bandwidth = conn['bandwidth']
             dc.tags = self.__get_tag_as_dict(conn['tags'])
-            dc.virtual_interfaces = None
+            dc.virtual_interfaces = self.__list_virtual_interfaces()
+            yield dc
 
     def __get_tag_as_dict(self, tag_list):
         tag_dict = {}
@@ -30,6 +31,31 @@ class AWSInfo:
             tag_dict[tag['key']] = tag['value']
 
         return tag_dict
+
+    def __list_virtual_interfaces(self, direct_connect_id):
+        vir_ints = self.__client.describe_virtual_interfaces(
+            connectionId=direct_connect_id
+        )
+
+        for vir_int in vir_ints['virtualInterfaces']:
+            vi = VirtualInterface()
+            vi.id = vir_int['virtualInterfaceId']
+            vi.name = vir_int['virtualInterfaceName']
+            vi.region = vir_int['region']
+            vi.type = vir_int['virtualInterfaceType']
+            vi.state = vir_int['virtualInterfaceState']
+
+            for bgp_info in vir_int['bgpPeers']:
+                bgp = BGP()
+                bgp.id = bgp_info['bgpPeerId']
+                bgp.address_family = bgp_info['addressFamily']
+                bgp.amazon_address = bgp_info['amazonAddress']
+                bgp.customer_address = bgp_info['customerAddress']
+                bgp.state = bgp_info['bgpPeerState']
+                bgp.status = bgp_info['bgpStatus']
+                vi.bgp = bgp
+
+            yield vi
 
 class DirectConnect:
 
