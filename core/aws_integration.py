@@ -79,7 +79,7 @@ class DirectConnect:
 
     @virtual_interfaces.setter
     def virtual_interfaces(self, value):
-        self.__virtual_interfaces.append(value)
+        self.__virtual_interfaces.extend(value)
 
 class VirtualInterface:
 
