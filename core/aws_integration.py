@@ -1,5 +1,6 @@
 import boto3
 from config import Config
+import logging
 
 CONFIG = Config()
 
@@ -14,7 +15,9 @@ class AWSInfo:
         )
 
     def list_direct_connect(self):
+        logging.info("Searching list of connections in region {}".format(CONFIG.aws_region))
         conns = self.__client.describe_connections()
+        logging.debug("Returned connections: {}".format(conns))
         for conn in conns['connections']:
             dc = DirectConnect()
             dc.owner_account = conn['ownerAccount']
@@ -28,16 +31,20 @@ class AWSInfo:
             yield dc
 
     def __get_tag_as_dict(self, tag_list):
+        logging.info("Turning the tag list into a simple dictionary")
         tag_dict = {}
         for tag in tag_list:
             tag_dict[tag['key']] = tag['value']
 
+        logging.debug("Tags: {}".format(tag_dict))
         return tag_dict
 
     def __list_virtual_interfaces(self, direct_connect_id):
+        logging.info("Search for list of interfaces with connection id {}".format(direct_connect_id))
         vir_ints = self.__client.describe_virtual_interfaces(
             connectionId=direct_connect_id
         )
+        logging.debug("Virtual Interfaces: {}".format(vir_ints))
         vi_list = []
 
         for vir_int in vir_ints['virtualInterfaces']:
