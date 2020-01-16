@@ -1,4 +1,8 @@
 import os
+import logging
+import sys
+
+logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
 class Config:
 
@@ -16,12 +20,16 @@ class Config:
 
     def __get_aws_access_key(self):
         if 'AWS_ACCESS_KEY' not in os.environ:
+            logging.critical("Environment variable AWS_ACCESS_KEY has not been set")
             raise EnvironmentError("Environment variable AWS_ACCESS_KEY has not been set")
         else:
+            logging.info("AWS_ACCESS_KEY environment variable returned!")
             return os.environ['AWS_ACCESS_KEY']
 
     def __get_aws_secret_key(self):
         if 'AWS_SECRET_KEY' not in os.environ:
+            logging.critical("Environment variable AWS_SECRET_KEY has not been set")
             raise EnvironmentError("Environment variable AWS_SECRET_KEY has not been set")
         else:
+            logging.info("AWS_SECRET_KEY environment variable returned!")
             return os.environ['AWS_SECRET_KEY']
