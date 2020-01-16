@@ -15,7 +15,12 @@ class AWSInfo:
 class DirectConnect:
 
     def __init__(self):
-        pass
+        self.owner_account = None
+        self.connection_id = None
+        self.region = None
+        self.location = None
+        self.bandwidth = None
+        self.tags = {}
 
 class VirtualInterface:
 
