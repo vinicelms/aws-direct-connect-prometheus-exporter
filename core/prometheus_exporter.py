@@ -10,6 +10,7 @@ class AWSDCExporter:
         pass
 
     def collect(self):
+        logging.info("Starting the information gathering process")
         aws = AWSInfo()
         dc_list = aws.list_direct_connect()
 
@@ -54,6 +55,7 @@ class AWSDCExporter:
                         bgp.state,
                         bgp.status
                     ]
+                    logging.debug("Values ​​Generated: {}".format(label_values))
 
                     gauge = GaugeMetricFamily(
                         name="dc_status".format(dc.name, vi.name),
@@ -64,6 +66,7 @@ class AWSDCExporter:
                         labels=label_values,
                         value=0
                     )
+                    logging.info("Gauge returned!")
                     yield gauge
 
 if __name__ == "__main__":
